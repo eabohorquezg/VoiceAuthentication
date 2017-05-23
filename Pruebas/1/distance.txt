@@ -1,0 +1,3 @@
+distance = 41.076481483085495
+float sampleRate = 48000;
+        int sampleSizeInBits = 16;
