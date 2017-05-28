@@ -85,7 +85,9 @@ public class User{
     
     public void createAccount(){
         try{
-            File data = new File(getName().toLowerCase()+".txt");                
+            File data = new File(getName().toLowerCase()+".txt");  
+            System.out.println("PATH_-------------------------->");
+            System.out.println(data.getAbsolutePath()); 
             FileWriter profile = new FileWriter(data);
             profile.write(getName()+"\n");
             profile.write(getDocument()+"\n");
