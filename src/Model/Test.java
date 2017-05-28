@@ -37,19 +37,19 @@ public class Test{
     }
     
     public static void main(String args[]) throws UnsupportedAudioFileException, IOException, InterruptedException{
-        JOptionPane.showMessageDialog (null, "Registre su voz", "Mensaje del sistema", JOptionPane.INFORMATION_MESSAGE);
-        double[] coefficientsPatternVoice = Test.voiceRecorder("OldInterview");
-        double[] coefficientsPatternVoices = Test.voiceRecorder("OldInterview2");
-        JOptionPane.showMessageDialog (null, "Autentiquese", "Mensaje del sistema", JOptionPane.INFORMATION_MESSAGE);
-        double[] coefficientsTestVoice = Test.voiceRecorder("SomeFatGuy");
-        DTW dtw = new DTW(coefficientsPatternVoice, coefficientsTestVoice);                                                                                              
-        System.out.println("distance = "+dtw.warpingDistance);
-        if( dtw.warpingDistance <= 80 ){
-            JOptionPane.showMessageDialog (null, "ACCESO CONCEDIDO", "Mensaje de sistema", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog (null, "ACCESO DENEGADO", "Mensaje de sistema", JOptionPane.ERROR_MESSAGE);
-        }                                                                                                                
-        System.exit(0);
+//        JOptionPane.showMessageDialog (null, "Registre su voz", "Mensaje del sistema", JOptionPane.INFORMATION_MESSAGE);
+//        double[] coefficientsPatternVoice = Test.voiceRecorder("OldInterview");
+//        double[] coefficientsPatternVoices = Test.voiceRecorder("OldInterview2");
+//        JOptionPane.showMessageDialog (null, "Autentiquese", "Mensaje del sistema", JOptionPane.INFORMATION_MESSAGE);
+//        double[] coefficientsTestVoice = Test.voiceRecorder("SomeFatGuy");
+//        DTW dtw = new DTW(coefficientsPatternVoice, coefficientsTestVoice);                                                                                              
+//        System.out.println("distance = "+dtw.warpingDistance);
+//        if( dtw.warpingDistance <= 80 ){
+//            JOptionPane.showMessageDialog (null, "ACCESO CONCEDIDO", "Mensaje de sistema", JOptionPane.INFORMATION_MESSAGE);
+//        }else{
+//            JOptionPane.showMessageDialog (null, "ACCESO DENEGADO", "Mensaje de sistema", JOptionPane.ERROR_MESSAGE);
+//        }                                                                                                                
+//        System.exit(0);
     }                            
     
 }
