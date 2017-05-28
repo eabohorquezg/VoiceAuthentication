@@ -26,9 +26,11 @@
                 <br/><br/>
                 <h:commandButton action="#{user.recordPatternVoice()}" value="Grabar"/>              
                 <br/><br/>
+                <h:outputText value="#{user.voiceLogMessage}"/>
+                <br/><br/>
                 <h:commandButton action="#{user.createAccount()}" value="Crear cuenta"/>              
                 <br/><br/>
-                <h:outputText value="#{user.message}"/>
+                <h:outputText value="#{user.accountCreationMessage}"/>
                 <br/><br/>
                 <hr/><br/>
                 <a href="http://localhost:8080/VoiceAuthentication/faces/index.xhtml">Inicio</a>                                

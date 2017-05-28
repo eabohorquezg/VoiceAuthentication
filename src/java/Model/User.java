@@ -28,16 +28,9 @@ public class User{
     private String name;
     private int document;
     private String career;
-    private String message;   
-    private String authenticationMessage;   
-
-    public String getAuthenticationMessage() {
-        return authenticationMessage;
-    }
-
-    public void setAuthenticationMessage(String authenticationMessage) {
-        this.authenticationMessage = authenticationMessage;
-    }
+    private String voiceLogMessage;   
+    private String authenticationMessage;
+    private String accountCreationMessage;             
     
     public User(){
     }
@@ -66,51 +59,78 @@ public class User{
         this.career = career;
     }    
     
-    public String getMessage() {
-        return message;
+    public String getVoiceLogMessage() {
+        return voiceLogMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setVoiceLogMessage(String voiceLogMessage) {
+        this.voiceLogMessage = voiceLogMessage;
+    }
+    
+    public String getAuthenticationMessage() {
+        return authenticationMessage;
+    }
+
+    public void setAuthenticationMessage(String authenticationMessage) {
+        this.authenticationMessage = authenticationMessage;
+    }
+    
+    public String getAccountCreationMessage() {
+        return accountCreationMessage;
+    }
+
+    public void setAccountCreationMessage(String accountCreationMessage) {
+        this.accountCreationMessage = accountCreationMessage;
     }
     
     public void createAccount(){
         try{
-        File data = new File(getName().toLowerCase()+".txt");        
-        FileWriter profile = new FileWriter(data,true);
-        profile.write(getName()+"\n");
-        profile.write(getDocument()+"\n");
-        profile.write(getCareer());
-        profile.close();
+            File data = new File(getName().toLowerCase()+".txt");                
+            FileWriter profile = new FileWriter(data);
+            profile.write(getName()+"\n");
+            profile.write(getDocument()+"\n");
+            profile.write(getCareer());
+            profile.close();
         }catch(IOException io){
-            setMessage("No se pudo crear cuenta!");    
+            setAccountCreationMessage("No se pudo crear cuenta!");    
         }
-        setMessage("Su cuenta fue creada satisfactoriamente!");
+        setAccountCreationMessage("Su cuenta fue creada satisfactoriamente!");
     }
     
-    public void recordPatternVoice() throws UnsupportedAudioFileException, IOException{                
-        new SoundRecorder(getName()).voiceRecorder();                
-        //si todo salio bien enviar un mensaje al usuario diciendo que se grabo bien!
+    public void recordPatternVoice(){               
+        try{
+            new SoundRecorder(getName()).voiceRecorder();                
+        }catch(Exception e){
+            setVoiceLogMessage("No se pudo registrar su voz");
+        }        
+        setVoiceLogMessage("Su voz fue registrada satisfactoriamente!");
     }
     
-    public void recordTestVoice() throws UnsupportedAudioFileException, IOException{
+    public void processAuthenticationVoice() throws UnsupportedAudioFileException, IOException{            
             new SoundRecorder("TestVoice").voiceRecorder();                
-            VoiceProcessing.compareVoices();
-            File archivo = new File (VoiceProcessing.name+".txt");
-            FileReader fr = new FileReader (archivo);
-            BufferedReader br = new BufferedReader(fr);
-            String name = br.readLine();
-            String document = br.readLine();
-            String career = br.readLine();
-            setAuthenticationMessage("Hemos reconocido tu voz, puedes ingresar!");            
-            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-            ec.getSessionMap().put("name", name);
-            ec.getSessionMap().put("document", document);
-            ec.getSessionMap().put("career", career);
-            String url = ec.encodeActionURL(
-            FacesContext.getCurrentInstance().getApplication().getViewHandler().getActionURL
-            (FacesContext.getCurrentInstance(),"/user_profile.xhtml"));
-            ec.redirect(url);            
+            if ( VoiceProcessing.compareVoices() ){ //si las voces son del mismo hablante
+                setAuthenticationMessage("Hemos reconocido tu voz, puedes ingresar!");            
+                File userData = new File(VoiceProcessing.speakerIdentified+".txt");
+                FileReader fr = new FileReader(userData);
+                BufferedReader br = new BufferedReader(fr);
+                String name = br.readLine();
+                String document = br.readLine();
+                String career = br.readLine();            
+                showUserProfile(name,document,career);            
+            }else{
+                setAuthenticationMessage("ACESSO DENEGADO");            
+            }
+    }
+    
+    public void showUserProfile(String name, String document, String career) throws IOException{
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.getSessionMap().put("name", name);
+        ec.getSessionMap().put("document", document);
+        ec.getSessionMap().put("career", career);
+        String url = ec.encodeActionURL(
+        FacesContext.getCurrentInstance().getApplication().getViewHandler().getActionURL
+        (FacesContext.getCurrentInstance(),"/user_profile.xhtml"));
+        ec.redirect(url);            
     }
     
 }

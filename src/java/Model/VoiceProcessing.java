@@ -22,7 +22,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class VoiceProcessing {
     
     public static int num_speakers;
-    public static String name;
+    public static String speakerIdentified;
     
     public static double[] getCoefficients(String nameAudio) throws UnsupportedAudioFileException, IOException{                
         File soundFile = new File(nameAudio+".wav");
@@ -40,7 +40,7 @@ public class VoiceProcessing {
     }
     
     public static List<String> getSpeakers(){
-        num_speakers=0;
+        num_speakers = 0;
         String path = 
         new File("TestVoice.wav").getAbsolutePath().substring
         (0,new File("TestVoice.wav").getAbsolutePath().length()-13);        
@@ -64,20 +64,21 @@ public class VoiceProcessing {
     }
     
     
-    public static void compareVoices() throws UnsupportedAudioFileException, IOException{
-        
-        List<String> list = getSpeakers();
-        double[] arr1 = getCoefficients("TestVoice");                                                  
-        int numaudio = num_speakers;         
-        double min=Integer.MAX_VALUE;               
-        for (int j=0; j<numaudio; j++){                            
-            double[] arr2 = getCoefficients(list.get(j));                                                  
+    public static boolean compareVoices() throws UnsupportedAudioFileException, IOException{
+        boolean resp = false;        
+        List<String> listOfSpeakers = getSpeakers();
+        double[] arr1 = getCoefficients("TestVoice");                                                                   
+        double min = Integer.MAX_VALUE;               
+        for (int j=0; j<num_speakers; j++){                            
+            double[] arr2 = getCoefficients(listOfSpeakers.get(j));                                                  
             DTW dtw = new DTW(arr1, arr2);                                
-            if( dtw.warpingDistance <= min ){
+            if( dtw.warpingDistance <= min && dtw.warpingDistance <= 1 ){
+                resp = true;
                 min = dtw.warpingDistance;
-                name = list.get(j);
+                speakerIdentified = listOfSpeakers.get(j);
             }                 
-        }        
+        }
+        return resp;
     }      
     
 }

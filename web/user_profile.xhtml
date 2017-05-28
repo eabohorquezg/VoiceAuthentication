@@ -8,6 +8,7 @@
     <h:body>
         <panel>
             <h:form> 
+                <h1>BIENVENIDO #{sessionScope.name} !!</h1>                
                 <h1>PERFIL DE USUARIO</h1>
                 <hr/>                                  
                 <label>Nombre:</label>
@@ -22,8 +23,9 @@
                 <br/><br/>
                 <h:outputText value="#{sessionScope.career}"/>
                 <br/><br/>
-                <hr/><br/>
-                <a href="http://localhost:8080/VoiceAuthentication/faces/index.xhtml">Inicio</a>                                
+                <br/><br/>
+                <a href="http://localhost:8080/VoiceAuthentication/faces/authentication.xhtml">Salir</a>                                
+                <br/><br/>                
             </h:form> 
         </panel>
     </h:body>
