@@ -67,12 +67,16 @@ public class VoiceProcessing {
     public static boolean compareVoices() throws UnsupportedAudioFileException, IOException{
         boolean resp = false;        
         List<String> listOfSpeakers = getSpeakers();
+        System.out.println("Aquiiiiiiiiiiiii<----------------------");
+        System.out.println(listOfSpeakers);
         double[] arr1 = getCoefficients("TestVoice");                                                                   
         double min = Integer.MAX_VALUE;               
         for (int j=0; j<num_speakers; j++){                            
             double[] arr2 = getCoefficients(listOfSpeakers.get(j));                                                  
-            DTW dtw = new DTW(arr1, arr2);                                
-            if( dtw.warpingDistance <= min && dtw.warpingDistance <= 1 ){
+            DTW dtw = new DTW(arr1, arr2);
+            System.out.println("Distancias: "+dtw.warpingDistance+"|"+dtw.warpingDistance);
+            if( dtw.warpingDistance <= min && dtw.warpingDistance <= 0.1 ){
+                System.out.println("Distancias: "+dtw.warpingDistance+"|"+dtw.warpingDistance);
                 resp = true;
                 min = dtw.warpingDistance;
                 speakerIdentified = listOfSpeakers.get(j);

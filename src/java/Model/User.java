@@ -108,7 +108,14 @@ public class User{
         setVoiceLogMessage("Su voz fue registrada satisfactoriamente!");
     }
     
-    public void processAuthenticationVoice() throws UnsupportedAudioFileException, IOException{            
+    public void emptyMessage(){
+        authenticationMessage = "";
+    }
+    
+    public void processAuthenticationVoice() throws UnsupportedAudioFileException, IOException{
+            File miDir = new File (".");
+            
+            System.out.println(miDir.getCanonicalPath()); 
             new SoundRecorder("TestVoice").voiceRecorder();                
             if ( VoiceProcessing.compareVoices() ){ //si las voces son del mismo hablante
                 setAuthenticationMessage("Hemos reconocido tu voz, puedes ingresar!");            
