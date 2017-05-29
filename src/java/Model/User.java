@@ -113,6 +113,8 @@ public class User{
     public void recordPatternVoice(){   
         Script = "";
         try{
+            File directorio=new File("voiceAuthentication");
+            directorio.mkdir(); 
             new SoundRecorder(getName()).voiceRecorder();
             
             //createAccount();
