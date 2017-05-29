@@ -25,7 +25,7 @@ public class VoiceProcessing {
     public static String speakerIdentified;
     
     public static double[] getCoefficients(String nameAudio) throws UnsupportedAudioFileException, IOException{                
-        File soundFile = new File(nameAudio+".wav");
+        File soundFile = new File("voiceAuthentication/"+nameAudio+".wav");
         AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);                                    
         AudioPreProcessor ap = new AudioPreProcessor(ais);   
         MFCC mfcc = new MFCC(11025.0f);   
@@ -42,8 +42,8 @@ public class VoiceProcessing {
     public static List<String> getSpeakers(){
         num_speakers = 0;
         String path = 
-        new File("TestVoice.wav").getAbsolutePath().substring
-        (0,new File("TestVoice.wav").getAbsolutePath().length()-13);        
+        new File("voiceAuthentication/TestVoice.wav").getAbsolutePath().substring
+        (0,new File("voiceAuthentication/TestVoice.wav").getAbsolutePath().length()-13);        
         String files;
         File folder = new File(path);        
         List<String> list = new ArrayList<>();
@@ -74,8 +74,8 @@ public class VoiceProcessing {
         for (int j=0; j<num_speakers; j++){                            
             double[] arr2 = getCoefficients(listOfSpeakers.get(j));                                                  
             DTW dtw = new DTW(arr1, arr2);
-            //System.out.println("Distancias: "+dtw.warpingDistance+"|"+dtw.warpingDistance);
-            if( dtw.warpingDistance <= min && dtw.warpingDistance <= 0.1 ){
+            System.out.println("Dis: "+dtw.warpingDistance+"|"+dtw.warpingDistance);
+            if( dtw.warpingDistance <= min && dtw.warpingDistance <= 0.01 ){
                 System.out.println("Distancias: "+dtw.warpingDistance+"|"+dtw.warpingDistance);
                 resp = true;
                 min = dtw.warpingDistance;

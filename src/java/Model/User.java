@@ -26,7 +26,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class User{
     
     private String name;
-    private int document;
+    private String document;
     private String career;
     private String voiceLogMessage;   
     private String authenticationMessage;
@@ -52,11 +52,11 @@ public class User{
         this.name = name;
     }
 
-    public int getDocument() {
+    public String getDocument() {
         return document;
     }
 
-    public void setDocument(int document) {
+    public void setDocument(String document) {
         this.document = document;
     }
 
@@ -95,7 +95,7 @@ public class User{
     public void createAccount(){
         Script = "";
         try{
-            File data = new File(getName().toLowerCase()+".txt");  
+            File data = new File("voiceAuthentication/"+getName().toLowerCase()+".txt");  
             System.out.println("PATH_-------------------------->");
             System.out.println(data.getAbsolutePath()); 
             FileWriter profile = new FileWriter(data);
@@ -105,7 +105,8 @@ public class User{
             profile.close();
         }catch(IOException io){
             setAccountCreationMessage("No se pudo crear cuenta!");    
-        }
+        }        
+        emptyMessage();
         setAccountCreationMessage("Su cuenta fue creada satisfactoriamente!");
     }
     
@@ -113,6 +114,7 @@ public class User{
         Script = "";
         try{
             new SoundRecorder(getName()).voiceRecorder();
+            
             //createAccount();
         }catch(Exception e){
             setVoiceLogMessage("No se pudo registrar su voz");
@@ -124,17 +126,23 @@ public class User{
     
     public void emptyMessage(){
         authenticationMessage = "";
+        setAccountCreationMessage("");
+        setAuthenticationMessage("");
+        setCareer("");
+        setDocument("");
+        setName("");
+        setVoiceLogMessage("");
     }
     
     public void processAuthenticationVoice() throws UnsupportedAudioFileException, IOException{
             Script = "";
-            File miDir = new File (".");
-            
+            File miDir = new File (".");            
             System.out.println(miDir.getCanonicalPath()); 
-            new SoundRecorder("TestVoice").voiceRecorder();                
+            new SoundRecorder("TestVoice").voiceRecorder();
+            
             if ( VoiceProcessing.compareVoices() ){ //si las voces son del mismo hablante
                 setAuthenticationMessage("Hemos reconocido tu voz, puedes ingresar!");            
-                File userData = new File(VoiceProcessing.speakerIdentified+".txt");
+                File userData = new File("voiceAuthentication/"+VoiceProcessing.speakerIdentified+".txt");
                 FileReader fr = new FileReader(userData);
                 BufferedReader br = new BufferedReader(fr);
                 String name = br.readLine();
@@ -145,6 +153,7 @@ public class User{
                 setAuthenticationMessage("ACESSO DENEGADO"); 
                 Script =  "$.jGrowl('"+getAuthenticationMessage()+"',{ life : 900})";
             }
+            emptyMessage();
             
     }
     

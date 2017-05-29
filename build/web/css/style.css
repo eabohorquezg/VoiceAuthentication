@@ -51,18 +51,17 @@ z-index: 2;
   position: absolute; 
   width: 320px; 
 float: left; 
-  opacity: 0; 
 display: none; 
   -webkit-transition: all 0.5s; 
 -moz-transition: all 0.5s; 
 -ms-transition: all 0.5s; 
 -o-transition: all 0.5s; 
 transition: all 0.5s; 
-} 
+}
 
+.messageDiv {position:relative;width:200px;height:65px;box-shadow:0 0 100px #FFF inset;}
+//.messageDiv2 {position:relative;width:200px;height:65px;box-shadow:0 0 100px #000 inset;}
 /* GENERAL RULES (OPTIONAL) */
-body {margin:0;background-color:#FFF;}
-h2 {font-weight:300;}
 .title-text {text-align:center;font-size:40px;color:#EEE;}
 .sidebar-tabs-menu-1 {position:relative;margin:40px auto;width:275px;}
 
@@ -78,12 +77,11 @@ h2 {font-weight:300;}
 
 /* REVEALED RULES */
 .sidebar-tabs-menu-1 .reveal {margin:58px 0 0 0;overflow:hidden;}
-
+.text_err {cursor:auto;color:#FFF; margin: 10px 0 0 0; overflow:hidden; background: #444}
 /* LAY RULES */
-.sidebar-tabs-menu-1 .reveal .lay-frame {position:relative;float:left;cursor:pointer;overflow:hidden;margin-top:30px;margin-bottom:20px;width:100%;height:450px;}
+.sidebar-tabs-menu-1 .reveal .lay-frame {position:relative;float:left;cursor:pointer;margin-top:30px;margin-bottom:20px;width:100%;height:450px;}
 .sidebar-tabs-menu-1 .reveal .lay-frame div {opacity:0;z-index:0;transform:translateX(200%);-webkit-transform:translateX(200%);}
-.sidebar-tabs-menu-1 .reveal .underlay {position:relative;float:left;width:300px;height:900px;box-shadow:0 0 1000px #444 inset;}
-.sidebar-tabs-menu-1 .reveal .underlay h2 {text-align:center;color:#EEE;line-height:62px;}
+.sidebar-tabs-menu-1 .reveal .underlay {position:relative;float:left;width:300px;height:450px;box-shadow:0 0 1000px #444 inset;}
 .sidebar-tabs-menu-1 .reveal .overlay {position:relative;width:100%;height:100%;color:#EEE;background-color:rgba(0,0,0,0.35);z-index:1;top:100%;opacity:0;}
 
 /* LAY HOVER RULES */

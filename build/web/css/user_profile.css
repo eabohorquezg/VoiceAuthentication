@@ -164,7 +164,8 @@ p {
     position: relative;
     overflow: hidden!important;
     -webkit-border-radius: 50%;
-    border-radius: 50%;
+    border-radius: 50%;    
+    text-decoration: none;
 }
 .profile-social-links li a img {
     position: relative;
@@ -185,11 +186,13 @@ p {
     -webkit-transform: scale3d(0, 0, 1);
     transform: scale3d(0, 0, 1);
     -webkit-border-radius: 50%;
-    border-radius: 50%;
+    border-radius: 50%;    
+    text-decoration: none;
 }
 .profile-social-links li a:hover:before {
     -webkit-animation: ripple 1s ease forwards;
-    animation: ripple 1s ease forwards;
+    animation: ripple 1s ease forwards;    
+    text-decoration: none;
 }
 .profile-social-links li a img,
 .profile-social-links li a svg {

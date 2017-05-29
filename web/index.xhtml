@@ -18,17 +18,17 @@
     </h:head>
     <h:body>
         <div class="sidebar-tabs-menu-1">
-            <label for="sidebar-tabs-menu-1-tab-1" class="tab">    
-                <input type="radio" name="sidebar-tabs-menu-1-tab" id="sidebar-tabs-menu-1-tab-1" value="sidebar-tabs-menu-1-recent" class="display-none" />
+            <label for="sidebar-tabs-menu-1-tab-1" class="tab" >    
+                <input type="radio"  name="sidebar-tabs-menu-1-tab" id="sidebar-tabs-menu-1-tab-1" value="sidebar-tabs-menu-1-recent" class="display-none" />
                 <div class="title">Iniciar Sesión</div>
                 <div class="reveal">
                     <h:form>
                         <div class="lay-frame" align="center">
-                            <div class="underlay">
-                                <h2>Iniciar Sessión</h2>
+                            <div class="underlay">                                
                                 <div>
-                                    <p style="color: #fff;">Grabe su voz para autenticarse</p>
-                                    <p style="color: #fff;">Ejemplo: "Soy Pedro"</p>
+                                    <h1 style="color: #fff;">Iniciar Sesión</h1>
+                                    <b><p style="color: #fff;">Grabe su voz para autenticarse</p></b>
+                                    <b><p style="color: #fff;">Ejemplo: "Soy Pedro"</p></b>
                                     <br></br>
                                     <h:commandButton  class="btn_login" action="#{user.processAuthenticationVoice()}" value="Grabar" onclick="cuentaRegresiva()" style="color: #fff; text-align: center;">
                                         <h:outputScript rendered="#{not empty user.script}">#{user.script}</h:outputScript>
@@ -53,7 +53,7 @@
                     <h:form>
                     <div class="lay-frame" align="center">
                         <div class="underlay">
-                            <h2>Registrarse</h2>
+                            <h1 style="color: #fff;">Registrarse</h1>
                             <h:inputText id="name" value="#{user.name}" pt:placeholder="Nombre" 
                                          class="form-control"  required="true" 
                                          requiredMessage="¡El nombre es requerido!"/>
@@ -66,22 +66,24 @@
                             
                             <h:inputText id="car" value="#{user.career}"  pt:placeholder="Carrera" 
                                          class="form-control" required="true" 
-                                         requiredMessage="¡La carrera es requerida!"/>                     
-                            <div>
-                                <h:message style="color: red;" for="name"/><br></br>   
-                                <h:message style="color: red;" for="document"/><br></br>
-                                <h:message style="color: red;" for="car"/><br></br>
+                                         requiredMessage="¡La carrera es requerida!"/>  
+                            <br></br>
+                            <div class="messageDiv2" align="center">
+                                <b><h:message style="color: red;" for="name"/></b><br></br>   
+                                <b><h:message style="color: red;" for="document"/></b><br></br>
+                                <b><h:message style="color: red;" for="car"/></b><br></br>
                             </div>
                             
-                            <h:commandButton class="btn_login" action="#{user.recordPatternVoice()}" 
+                        <h:commandButton class="btn_login" action="#{user.recordPatternVoice()}" 
                                              value="Grabar"  onclick="cuentaRegresiva()"
                                              style="color: #fff; text-align: center;"/>    
                             
                             <h:commandButton class="btn_sign_up" action="#{user.createAccount()}" 
                                              value="Crear cuenta"/>              
-                
-                            <p><h:outputText value="#{user.voiceLogMessage}"/></p>
-                            <p><h:outputText value="#{user.accountCreationMessage}"/></p> 
+                            <div class="messageDiv2" align="center" style="margin-top: 10px">
+                                <p class="text_err"><h:outputText value="#{user.voiceLogMessage}"/></p>
+                                <p class="text_err"><h:outputText value="#{user.accountCreationMessage}"/></p> 
+                            </div>
                         </div>
                     </div>
                     </h:form>    

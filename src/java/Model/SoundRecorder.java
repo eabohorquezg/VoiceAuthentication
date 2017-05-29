@@ -24,7 +24,7 @@ public class SoundRecorder{
     }
     
     public SoundRecorder(String name){
-        wavFile = new File(name+".wav");        
+        wavFile = new File("voiceAuthentication/"+name+".wav");        
         fileType = AudioFileFormat.Type.WAVE;                
     }
     
