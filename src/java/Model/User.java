@@ -30,7 +30,16 @@ public class User{
     private String career;
     private String voiceLogMessage;   
     private String authenticationMessage;
-    private String accountCreationMessage;             
+    private String accountCreationMessage;
+    private String Script;
+
+    public String getScript() {
+        return Script;
+    }
+
+    public void setScript(String Script) {
+        this.Script = Script;
+    }
     
     public User(){
     }
@@ -84,6 +93,7 @@ public class User{
     }
     
     public void createAccount(){
+        Script = "";
         try{
             File data = new File(getName().toLowerCase()+".txt");  
             System.out.println("PATH_-------------------------->");
@@ -99,16 +109,17 @@ public class User{
         setAccountCreationMessage("Su cuenta fue creada satisfactoriamente!");
     }
     
-    public void recordPatternVoice(){               
+    public void recordPatternVoice(){   
+        Script = "";
         try{
             new SoundRecorder(getName()).voiceRecorder();
-            createAccount();
+            //createAccount();
         }catch(Exception e){
             setVoiceLogMessage("No se pudo registrar su voz");
-            setAccountCreationMessage("No se pudo crear cuenta!");
+            //setAccountCreationMessage("No se pudo crear cuenta!");
         }        
         setVoiceLogMessage("Su voz fue registrada satisfactoriamente!");
-        setAccountCreationMessage("Su cuenta fue creada satisfactoriamente!");
+        //setAccountCreationMessage("Su cuenta fue creada satisfactoriamente!");
     }
     
     public void emptyMessage(){
@@ -116,6 +127,7 @@ public class User{
     }
     
     public void processAuthenticationVoice() throws UnsupportedAudioFileException, IOException{
+            Script = "";
             File miDir = new File (".");
             
             System.out.println(miDir.getCanonicalPath()); 
@@ -130,8 +142,10 @@ public class User{
                 String career = br.readLine();            
                 showUserProfile(name,document,career);            
             }else{
-                setAuthenticationMessage("ACESSO DENEGADO");            
+                setAuthenticationMessage("ACESSO DENEGADO"); 
+                Script =  "$.jGrowl('"+getAuthenticationMessage()+"',{ life : 900})";
             }
+            
     }
     
     public void showUserProfile(String name, String document, String career) throws IOException{

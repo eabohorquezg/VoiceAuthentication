@@ -3,86 +3,91 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-        
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.jgrowl.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>    
     
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script language="javascript" src="js/functions.js"></script> 
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
     
     <h:head>
         <title>Voice Authentication</title>
     </h:head>
     <h:body>
-        <div class="cotn_principal">
-            <div class="cont_centrar">
-
-                <div class="cont_login">
-                    <div class="cont_info_log_sign_up">
-                        <div class="col_md_login">
-                            <div class="cont_ba_opcitiy">
-                                <h2>Iniciar Sesión</h2>  
-                                <p>Inicia sesión por medio de tu voz</p> 
-                                <button class="btn_login"  onclick="cambiar_login()">Iniciar Sesión</button>
+        <div class="sidebar-tabs-menu-1">
+            <label for="sidebar-tabs-menu-1-tab-1" class="tab">    
+                <input type="radio" name="sidebar-tabs-menu-1-tab" id="sidebar-tabs-menu-1-tab-1" value="sidebar-tabs-menu-1-recent" class="display-none" />
+                <div class="title">Iniciar Sesión</div>
+                <div class="reveal">
+                    <h:form>
+                        <div class="lay-frame" align="center">
+                            <div class="underlay">
+                                <h2>Iniciar Sessión</h2>
+                                <div>
+                                    <p style="color: #fff;">Grabe su voz para autenticarse</p>
+                                    <p style="color: #fff;">Ejemplo: "Soy Pedro"</p>
+                                    <br></br>
+                                    <h:commandButton  class="btn_login" action="#{user.processAuthenticationVoice()}" value="Grabar" onclick="cuentaRegresiva()" style="color: #fff; text-align: center;">
+                                        <h:outputScript rendered="#{not empty user.script}">#{user.script}</h:outputScript>
+                                    </h:commandButton>                     
+                                    <br></br>
+                                    <br></br>
+                                    <b style="color:#fff"><h:outputText value="#{user.authenticationMessage}"/></b>
+                                    
+                                </div>
                             </div>
                         </div>
-                        <div class="col_md_sign_up">
-                            <div class="cont_ba_opcitiy">
-                                <h2>Registrarse</h2>
-                                <p>Registrate y obten seguridad.</p>                                
-                                <button class="btn_sign_up" onclick="cambiar_sign_up()">Registrarse</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="cont_back_info">
-                        <div class="cont_img_back_grey">
-                        </div>
-                    </div>
-                    <div class="cont_forms" >
-                        <h:form>
-                            <div class="cont_form_login">
-                                <a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
-                                <h2>Iniciar Sesión</h2>
-                                <br></br>
-                                <br></br>
-                                <h4>Grabe su voz para autenticarse</h4>
-                                <br></br>
-                                <h4>Ejemplo: "Soy Pedro"</h4>
-                                <br></br>
-                                <h:commandButton  class="btn_login" action="#{user.processAuthenticationVoice()}" value="Grabar" onclick="cuentaRegresiva()" style="color: #fff; text-align: center;"/>                     
-                            </div>
-                            <h:outputText value="#{user.authenticationMessage}"/>
-                        </h:form>
-                        
-                        <h:form>
-                        <div class="cont_form_sign_up">
-                            <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
-                            <h2>Registrarse</h2>
-                            <h:inputText value="#{user.name}" pt:placeholder="Nombre" class="form-control"  required="true" requiredMessage="¡El nombre es requerido!"/>
-                            <h:inputText value="#{user.document}" pt:placeholder="Documento" class="form-control" required="true" requiredMessage="¡El documento es requerido!"/>
-                            <h:inputText value="#{user.career}"  pt:placeholder="Carrera" class="form-control" required="true" requiredMessage="¡La carrera es requerida!"/>                     
-                            <h:commandButton class="btn_record" action="#{user.recordPatternVoice()}" value="Grabar" onclick="cuentaRegresiva()" style="color: #fff; text-align: center;"/>              
-                              </div>
-                            <h:outputText value="#{user.voiceLogMessage}"/>
-                            <h:outputText value="#{user.accountCreationMessage}"/>              
-                        </h:form>
-                    </div>
+                    </h:form>
                 </div>
-            </div>
+            </label>
+
+            <label for="sidebar-tabs-menu-1-tab-2" class="tab">    
+                <input type="radio" name="sidebar-tabs-menu-1-tab" id="sidebar-tabs-menu-1-tab-2" value="sidebar-tabs-menu-1-popular" class="display-none" checked=""/>
+
+                <div class="title not-first">Registrarse</div>
+                <div class="reveal">
+                    
+                    <h:form>
+                    <div class="lay-frame" align="center">
+                        <div class="underlay">
+                            <h2>Registrarse</h2>
+                            <h:inputText id="name" value="#{user.name}" pt:placeholder="Nombre" 
+                                         class="form-control"  required="true" 
+                                         requiredMessage="¡El nombre es requerido!"/>
+                            
+                            
+                            <h:inputText id="document" value="#{user.document}" pt:placeholder="Documento" 
+                                         class="form-control" required="true" 
+                                         requiredMessage="¡El documento es requerido!"/>
+                            
+                            
+                            <h:inputText id="car" value="#{user.career}"  pt:placeholder="Carrera" 
+                                         class="form-control" required="true" 
+                                         requiredMessage="¡La carrera es requerida!"/>                     
+                            <div>
+                                <h:message style="color: red;" for="name"/><br></br>   
+                                <h:message style="color: red;" for="document"/><br></br>
+                                <h:message style="color: red;" for="car"/><br></br>
+                            </div>
+                            
+                            <h:commandButton class="btn_login" action="#{user.recordPatternVoice()}" 
+                                             value="Grabar"  onclick="cuentaRegresiva()"
+                                             style="color: #fff; text-align: center;"/>    
+                            
+                            <h:commandButton class="btn_sign_up" action="#{user.createAccount()}" 
+                                             value="Crear cuenta"/>              
+                
+                            <p><h:outputText value="#{user.voiceLogMessage}"/></p>
+                            <p><h:outputText value="#{user.accountCreationMessage}"/></p> 
+                        </div>
+                    </div>
+                    </h:form>    
+                </div>
+            </label>
         </div>
-        <panel>
-            <h:form>
-            <h1>PAGINA DE INICIO</h1>
-            <hr/>                   
-            <br/>
-            <a href="http://localhost:8080/VoiceAuthentication/faces/register.xhtml">Registro</a>              
-            <br/><br/>
-            <a href="http://localhost:8080/VoiceAuthentication/faces/authentication.xhtml">Autenticacion</a>              
-            </h:form>
-        </panel>
         <form name="fcuentareg">
             <input type="text" name="tiempoact" style="visibility:hidden"></input>
         </form>
