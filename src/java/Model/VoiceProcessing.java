@@ -75,7 +75,7 @@ public class VoiceProcessing {
             double[] arr2 = getCoefficients(listOfSpeakers.get(j));                                                  
             DTW dtw = new DTW(arr1, arr2);
             System.out.println("Distancias: "+dtw.warpingDistance+"|"+dtw.warpingDistance);
-            if( dtw.warpingDistance <= min && dtw.warpingDistance <= 0.1 ){
+            if( dtw.warpingDistance <= min && dtw.warpingDistance <= 1 ){
                 System.out.println("Distancias: "+dtw.warpingDistance+"|"+dtw.warpingDistance);
                 resp = true;
                 min = dtw.warpingDistance;

@@ -64,9 +64,8 @@
                             <h:inputText value="#{user.name}" pt:placeholder="Nombre" class="form-control"  required="true" requiredMessage="¡El nombre es requerido!"/>
                             <h:inputText value="#{user.document}" pt:placeholder="Documento" class="form-control" required="true" requiredMessage="¡El documento es requerido!"/>
                             <h:inputText value="#{user.career}"  pt:placeholder="Carrera" class="form-control" required="true" requiredMessage="¡La carrera es requerida!"/>                     
-                            <h:commandButton class="btn_sign" action="#{user.recordPatternVoice()}" value="Grabar" onclick="cuentaRegresiva()" style="color: #fff; text-align: center;"/>              
-                            <h:commandButton action="#{user.createAccount()}" value="Crear cuenta"/>              
-                        </div>
+                            <h:commandButton class="btn_record" action="#{user.recordPatternVoice()}" value="Grabar" onclick="cuentaRegresiva()" style="color: #fff; text-align: center;"/>              
+                              </div>
                             <h:outputText value="#{user.voiceLogMessage}"/>
                             <h:outputText value="#{user.accountCreationMessage}"/>              
                         </h:form>

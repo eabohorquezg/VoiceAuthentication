@@ -101,11 +101,14 @@ public class User{
     
     public void recordPatternVoice(){               
         try{
-            new SoundRecorder(getName()).voiceRecorder();                
+            new SoundRecorder(getName()).voiceRecorder();
+            createAccount();
         }catch(Exception e){
             setVoiceLogMessage("No se pudo registrar su voz");
+            setAccountCreationMessage("No se pudo crear cuenta!");
         }        
         setVoiceLogMessage("Su voz fue registrada satisfactoriamente!");
+        setAccountCreationMessage("Su cuenta fue creada satisfactoriamente!");
     }
     
     public void emptyMessage(){
